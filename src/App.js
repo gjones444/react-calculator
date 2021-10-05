@@ -22,6 +22,20 @@ function App() {
 		}
 	}
 
+	const calculate = () => {
+		SetCalc(eval(calc).toString());
+	}
+
+	const deleteLast = () => {
+		if (calc == ''){
+			return;
+		}
+
+		const value =  calc.slice(0, -1);
+
+		SetCalc(value);
+	}
+
 	const createDigits = () => {
 		const digits = [];
 		
@@ -41,8 +55,9 @@ function App() {
 		<div className="App">
 			<div className="calculator">
 				<div className="display">
-						{result ? <span>({result})</span> : ''}
 						{calc || "0"}
+						&nbsp;
+						{result ? <span>({result})</span> : ''}
 				</div>
 					<div className="operators">
 						<button onClick={() => updateCalc('/')}> / </button>
@@ -50,14 +65,14 @@ function App() {
 						<button onClick={() => updateCalc('+')}> + </button>
 						<button onClick={() => updateCalc('-')}> - </button>
 
-						<button> DEL </button>
+						<button onClick={deleteLast}> DEL </button>
 					</div>
 
 					<div className="digits">
 						{ createDigits() }
 						<button onClick={() => updateCalc('0')}> 0 </button>
 						<button onClick={() => updateCalc('.')}> . </button>
-						<button onClick={() => updateCalc('=')}> = </button>
+						<button onClick={calculate}> = </button>
 					</div>
 			</div>
 		</div>
